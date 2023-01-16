@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- HTML -->
+    <h1>Hello from HTML</h1>
+
+    <!-- JavaScript -->
+    <div id="js"></div>
+
+    <!-- React JS -->
+    <!-- React single element -->
+    <div id="react"></div>
+    <!-- React nested element -->
+    <div id="nestedelement"></div>
+    <!-- Fragment -->
+    <div id="fragment"></div>
+    <div id="list"></div>
+    <div id="jsx-list"></div>
+    <div id="bio"></div>
+    <div id="img"></div>
+    <div id="function"></div>
+    <div id="clock"></div>
+
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel CDN -->
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        // JavaScript
+        const root = document.querySelector('#js');         // select the div with id="js"
+        //console.log(root);                                  // log the div with id="js" to the console    
+        const element = document.createElement('h1');       // create an h1 element
+        //console.log(element);                               // log the h1 element to the console 
+        element.innerHTML = 'Hello from JavaScript';        // set the innerHTML of the h1 element
+        element.textContent = 'Hello from JavaScript';      // set the textContent of the h1 element
+        element.className = 'heading-1';                    // set the class of the h1 element
+        root.appendChild(element);                          // append the h1 element to the div with id="js"
+
+        // React JS
+        const reactRoot = document.querySelector('#react'); // select the div with id="react"
+        const reactElement = React.createElement('h1',      // create an h1 element
+            {
+                children: 'Hello from React JS',            // set the children of the h1 element
+                className: 'heading-1',                     // set the class of the h1 element
+            }
+        );
+        //console.log(reactElement);                          // log the h1 element to the console
+        ReactDOM.render(reactElement, reactRoot);           // render the h1 element to the div with id="react"
+
+        // Nested Element
+        const nestedElementRoot = document.querySelector('#nestedelement'); // select the div with id="nestedelement"
+        const reactElement1 = React.createElement('p',
+            {
+                children: 'Paragraph 1 from react',
+            }
+        );
+        const reactElement2 = React.createElement('p',
+            {
+                children: 'Paragraph 2 from react',
+            }
+        );
+        const nestedElement = React.createElement('div',
+            {
+                children: [reactElement1, reactElement2],
+            }
+        );
+        ReactDOM.render(nestedElement, nestedElementRoot);
+
+        // Fragment
+        const fragmentRoot = document.querySelector('#fragment');
+        const fragmentElement = React.createElement(React.Fragment,
+            {
+                children: [reactElement1, reactElement2, reactElement1, reactElement2],
+            }
+        );
+        ReactDOM.render(fragmentElement, fragmentRoot);
+
+        // List
+        const elementList = React.createElement('ul',
+            { className: 'list' }, // set props
+            React.createElement('li', null, 'List Item 1'),
+            React.createElement('li', null, 'List Item 2'),
+            React.createElement('li', null, 'List Item 3'),
+            React.createElement('li', null, 'List Item 4'),
+        );
+        ReactDOM.render(elementList, document.querySelector('#list'));
+
+        // JSX
+        const jsxRoot = document.querySelector('#jsx-list');
+        const jsxElement = (
+            <ul>
+                <li>Hello from JSX</li>
+                <li>Paragraph 1 from JSX</li>
+                <li>Paragraph 2 from JSX</li>
+            </ul>
+        );
+        ReactDOM.render(jsxElement, jsxRoot);
+
+        // JSX with data
+        const bioRoot = document.querySelector('#bio');
+        const bioData = {
+            name: 'John Doe',
+            age: 25,
+            address: 'New York',
+        };
+        const className = 'heading-5';
+        const bioElement = (
+            <div>
+                <h1 className="heading-5">Biodata</h1>
+                <p className={className}>Name: {bioData.name}</p>
+                <p>Age: {bioData.age}</p>
+                <p>Address: {bioData.address}</p>
+            </div>
+        );
+        ReactDOM.render(bioElement, bioRoot);
+
+        // JSX with image
+        const imgRoot = document.querySelector('#img');
+        const imgElement = (
+            <img src="https://picsum.photos/200/300" alt="random image" />
+            // in html you can use image with <img src="" >
+            // if you want to use image on react you need to close the tag with /
+            // <img src="" />
+        );
+        ReactDOM.render(imgElement, imgRoot);
+
+        // JSX with React Component
+        const functionRoot = document.querySelector('#function');
+        function Hello(props) {
+            return <p>Hello {props.name}</p>;
+        }
+        const functionElement = (
+            <div>
+                <Hello name="John" />
+                <Hello name="Arif" />
+                <Hello name="Arif" />
+            </div>
+        );
+        ReactDOM.render(functionElement, functionRoot);
+
+        // JSX with React Component
+        const clockRoot = document.querySelector('#clock');
+        function Clock(props) {
+            return <p>Time: {props.time}</p>;
+        }
+        function tick() {
+            const time = new Date().toLocaleTimeString();
+            const clockElement = <Clock time={time} />;
+            ReactDOM.render(clockElement, clockRoot);
+        }
+        setInterval(tick, 1000);
+
+    </script>
+
+</body>
+
+</html>
